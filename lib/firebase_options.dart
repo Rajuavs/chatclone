@@ -44,29 +44,35 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCuq04DW2JN_k7fu6NaGQu-us-QxcM8Hmw',
-    appId: '1:165248862031:web:4d79687863b5eb99fd273a',
-    messagingSenderId: '165248862031',
-    projectId: 'chatclone-10a0d',
-    authDomain: 'chatclone-10a0d.firebaseapp.com',
-    storageBucket: 'chatclone-10a0d.appspot.com',
-  );
+      // apiKey: 'AIzaSyDUP6X1di-ekI5O0DuxozZw_D51odtHtkQ',
+      // appId: '',
+      // messagingSenderId: '247551785039',
+      // projectId: 'chatclone-dd871',
+      // authDomain: 'chatclone-10a0d.firebaseapp.com',
+      // storageBucket: 'chatclone-10a0d.appspot.com',
+      apiKey: "AIzaSyDUP6X1di-ekI5O0DuxozZw_D51odtHtkQ",
+      authDomain: "chatclone-dd871.firebaseapp.com",
+      projectId: "chatclone-dd871",
+      storageBucket: "chatclone-dd871.appspot.com",
+      messagingSenderId: "247551785039",
+      appId: "1:247551785039:web:0257570718463485e3923a");
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDcSFupXy7CE2oQiec58cRCNuTQn2K733U',
-    appId: '1:165248862031:android:ca79b04f5943906dfd273a',
-    messagingSenderId: '165248862031',
-    projectId: 'chatclone-10a0d',
-    storageBucket: 'chatclone-10a0d.appspot.com',
+    apiKey: 'AIzaSyDUP6X1di-ekI5O0DuxozZw_D51odtHtkQ',
+    appId: '1:247551785039:android:fc5b1c9858636227e3923a',
+    messagingSenderId: '247551785039',
+    projectId: 'chatclone-dd871',
+    storageBucket: 'chatclone-dd871.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAvAbAmshzbmr5fzEFBwwuojvWRzLSpQMg',
-    appId: '1:165248862031:ios:01834024a1eaa858fd273a',
-    messagingSenderId: '165248862031',
-    projectId: 'chatclone-10a0d',
-    storageBucket: 'chatclone-10a0d.appspot.com',
-    iosClientId: '165248862031-g7jt2ijris41uoeg08iibadcdulkpta5.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDUP6X1di-ekI5O0DuxozZw_D51odtHtkQ',
+    appId: '1:247551785039:ios:97413c2331ca8118e3923a',
+    messagingSenderId: '247551785039',
+    projectId: 'chatclone-dd871',
+    storageBucket: 'chatclone-dd871.appspot.com',
+    iosClientId:
+        '165248862031-g7jt2ijris41uoeg08iibadcdulkpta5.apps.googleusercontent.com',
     iosBundleId: 'com.example.chatclone',
   );
 
@@ -76,7 +82,12 @@ class DefaultFirebaseOptions {
     messagingSenderId: '165248862031',
     projectId: 'chatclone-10a0d',
     storageBucket: 'chatclone-10a0d.appspot.com',
-    iosClientId: '165248862031-g7jt2ijris41uoeg08iibadcdulkpta5.apps.googleusercontent.com',
+    iosClientId:
+        '165248862031-g7jt2ijris41uoeg08iibadcdulkpta5.apps.googleusercontent.com',
     iosBundleId: 'com.example.chatclone',
   );
 }
+
+
+
+///flutterfire configure --project=chatclone-dd871

@@ -1,1 +1,1 @@
-const appName = "Chat clone";
+const appName = "Chat";

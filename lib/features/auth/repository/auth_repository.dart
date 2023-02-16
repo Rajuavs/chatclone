@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common/repositories/common_firebase_storage_repository.dart';
-import '../../../mobile_layout_screen.dart';
+import '../../../models/mobile_layout_screen.dart';
 import '../../../models/user_model.dart';
+import '../../../util/utils.dart';
+import '../screens/otp_screen.dart';
+import '../screens/user_information_screen.dart';
 
 // import '../../../common/repositories/common_firebase_storage_repository.dart';
 // import '../../../common/utils/utils.dart';
@@ -56,19 +59,20 @@ class AuthRepository {
           await auth.signInWithCredential(credential);
         },
         verificationFailed: (e) {
+          showSnackBar(context: context, content: e.message!);
           throw Exception(e.message);
         },
         codeSent: ((String verificationId, int? resendToken) async {
-          // Navigator.pushNamed(
-          //   context,
-          //   OTPScreen.routeName,
-          //   arguments: verificationId,
-          // );
+          Navigator.pushNamed(
+            context,
+            OTPScreen.routeName,
+            arguments: verificationId,
+          );
         }),
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     } on FirebaseAuthException catch (e) {
-      // showSnackBar(context: context, content: e.message!);
+      showSnackBar(context: context, content: e.message!);
     }
   }
 
@@ -83,13 +87,13 @@ class AuthRepository {
         smsCode: userOTP,
       );
       await auth.signInWithCredential(credential);
-      // Navigator.pushNamedAndRemoveUntil(
-      //   context,
-      //   UserInformationScreen.routeName,
-      //   (route) => false,
-      // );
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        UserInformationScreen.routeName,
+        (route) => false,
+      );
     } on FirebaseAuthException catch (e) {
-      // showSnackBar(context: context, content: e.message!);
+      showSnackBar(context: context, content: e.message!);
     }
   }
 
@@ -112,7 +116,15 @@ class AuthRepository {
               profilePic,
             );
       }
-
+      var d = {
+        "name": name,
+        "uid": uid,
+        "profilePic": photoUrl,
+        "isOnline": true,
+        "phoneNumber": auth.currentUser!.phoneNumber!,
+        "groupId": [],
+      };
+      print(d);
       var user = UserModel(
         name: name,
         uid: uid,

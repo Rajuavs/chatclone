@@ -1,8 +1,15 @@
+import 'dart:io';
+
+import 'package:chatclone/util/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'features/auth/controller/auth_controller.dart';
-import 'util/colors.dart';
+import '../features/auth/controller/auth_controller.dart';
+import '../features/chat/widgets/contacts_list.dart';
+import '../features/group/screens/create_group_screen.dart';
+import '../features/select_contacts/screens/select_contacts_screen.dart';
+import '../util/colors.dart';
+import '../util/utils.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // import 'common/utils/colors.dart';
@@ -35,7 +42,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
   @override
   void initState() {
     super.initState();
-    tabBarController = TabController(length: 3, vsync: this);
+    tabBarController = TabController(length: 2, vsync: this);
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -47,6 +54,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("didchangeapplife cycle state ${state.name}");
     super.didChangeAppLifecycleState(state);
     switch (state) {
       case AppLifecycleState.resumed:
@@ -63,14 +71,14 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: appBarColor,
           centerTitle: false,
           title: const Text(
-            'WhatsApp',
+            appName,
             style: TextStyle(
               fontSize: 20,
               color: Colors.grey,
@@ -82,23 +90,23 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               icon: const Icon(Icons.search, color: Colors.grey),
               onPressed: () {},
             ),
-            // PopupMenuButton(
-            //   icon: const Icon(
-            //     Icons.more_vert,
-            //     color: Colors.grey,
-            //   ),
-            //   itemBuilder: (context) => [
-            //     PopupMenuItem(
-            //       child: const Text(
-            //         'Create Group',
-            //       ),
-            //       onTap: () => Future(
-            //         () => Navigator.pushNamed(
-            //             context, CreateGroupScreen.routeName),
-            //       ),
-            //     )
-            //   ],
-            // ),
+            PopupMenuButton(
+              icon: const Icon(
+                Icons.more_vert,
+                color: Colors.grey,
+              ),
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: const Text(
+                    'Create Group',
+                  ),
+                  onTap: () => Future(
+                    () => Navigator.pushNamed(
+                        context, CreateGroupScreen.routeName),
+                  ),
+                )
+              ],
+            ),
           ],
           bottom: TabBar(
             controller: tabBarController,
@@ -113,9 +121,9 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               Tab(
                 text: 'CHATS',
               ),
-              Tab(
-                text: 'STATUS',
-              ),
+              // Tab(
+              //   text: 'STATUS',
+              // ),
               Tab(
                 text: 'CALLS',
               ),
@@ -123,36 +131,36 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           ),
         ),
         body: Container(
-            // child: TabBarView(
-            //   controller: tabBarController,
-            //   children: const [
-            //     ContactsList(),
-            //     StatusContactsScreen(),
-            //     Text('Calls')
-            //   ],
-            // ),
-            ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () async {
-        //     if (tabBarController.index == 0) {
-        //       Navigator.pushNamed(context, SelectContactsScreen.routeName);
-        //     } else {
-        //       File? pickedImage = await pickImageFromGallery(context);
-        //       if (pickedImage != null) {
-        //         Navigator.pushNamed(
-        //           context,
-        //           ConfirmStatusScreen.routeName,
-        //           arguments: pickedImage,
-        //         );
-        //       }
-        //     }
-        //   },
-        //   backgroundColor: tabColor,
-        //   child: const Icon(
-        //     Icons.comment,
-        //     color: Colors.white,
-        //   ),
-        // ),
+          child: TabBarView(
+            controller: tabBarController,
+            children: const [
+              ContactsList(),
+              // StatusContactsScreen(),
+              Text('Calls')
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            if (tabBarController.index == 0) {
+              Navigator.pushNamed(context, SelectContactsScreen.routeName);
+            } else {
+              // File? pickedImage = await pickImageFromGallery(context);
+              // if (pickedImage != null) {
+              //   Navigator.pushNamed(
+              //     context,
+              //     ConfirmStatusScreen.routeName,
+              //     arguments: pickedImage,
+              //   );
+              // }
+            }
+          },
+          backgroundColor: tabColor,
+          child: const Icon(
+            Icons.comment,
+            color: appBarColor,
+          ),
+        ),
       ),
     );
   }

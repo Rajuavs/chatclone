@@ -11,6 +11,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common/widgets/custom_button.dart';
 import '../../../util/colors.dart';
+import 'package:country_picker/country_picker.dart';
+
+import '../../../util/utils.dart';
+import '../controller/auth_controller.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/login-screen';
@@ -22,7 +26,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final phoneController = TextEditingController();
-  // Country? country;
+  Country? country;
 
   @override
   void dispose() {
@@ -31,24 +35,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void pickCountry() {
-    // showCountryPicker(
-    //     context: context,
-    //     onSelect: (Country country_) {
-    //       setState(() {
-    //         country = country_;
-    //       });
-    //     });
+    showCountryPicker(
+        context: context,
+        onSelect: (Country country_) {
+          setState(() {
+            country = country_;
+          });
+        });
   }
 
   void sendPhoneNumber() {
-    // String phoneNumber = phoneController.text.trim();
-    // if (country != null && phoneNumber.isNotEmpty) {
-    //   ref
-    //       .read(authControllerProvider)
-    //       .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
-    // } else {
-    //   // showSnackBar(context: context, content: 'Fill out all the fields');
-    // }
+    String phoneNumber = phoneController.text.trim();
+    if (country != null && phoneNumber.isNotEmpty) {
+      ref
+          .read(authControllerProvider)
+          .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
+    } else {
+      showSnackBar(context: context, content: 'Fill out all the fields');
+    }
   }
 
   @override

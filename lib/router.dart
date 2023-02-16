@@ -1,9 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'common/widgets/error.dart';
 import 'features/auth/screens/login_screen.dart';
+import 'features/auth/screens/otp_screen.dart';
+import 'features/auth/screens/user_information_screen.dart';
+import 'features/chat/screens/mobile_chat_screens.dart';
+import 'features/group/screens/create_group_screen.dart';
+import 'features/select_contacts/screens/select_contacts_screen.dart';
 
 // import 'package:whatsapp_ui/common/widgets/error.dart';
 // import 'package:whatsapp_ui/features/auth/screens/login_screen.dart';
@@ -22,35 +25,37 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const LoginScreen(),
       );
-    // case OTPScreen.routeName:
-    //   final verificationId = settings.arguments as String;
-    //   return MaterialPageRoute(
-    //     builder: (context) => OTPScreen(
-    //       verificationId: verificationId,
-    //     ),
-    //   );
-    // case UserInformationScreen.routeName:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const UserInformationScreen(),
-    //   );
-    // case SelectContactsScreen.routeName:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const SelectContactsScreen(),
-    //   );
-    // case MobileChatScreen.routeName:
-    //   final arguments = settings.arguments as Map<String, dynamic>;
-    //   final name = arguments['name'];
-    //   final uid = arguments['uid'];
-    //   final isGroupChat = arguments['isGroupChat'];
-    //   final profilePic = arguments['profilePic'];
-    //   return MaterialPageRoute(
-    //     builder: (context) => MobileChatScreen(
-    //       name: name,
-    //       uid: uid,
-    //       isGroupChat: isGroupChat,
-    //       profilePic: profilePic,
-    //     ),
-    //   );
+    case OTPScreen.routeName:
+      final verificationId = settings.arguments as String;
+      return MaterialPageRoute(
+        builder: (context) => OTPScreen(
+          verificationId: verificationId,
+        ),
+      );
+    case UserInformationScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const UserInformationScreen(),
+      );
+    case SelectContactsScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const SelectContactsScreen(),
+      );
+    case MobileChatScreen.routeName:
+      final arguments = settings.arguments as Map<String, dynamic>;
+      final name = arguments['name'];
+      final uid = arguments['uid'];
+      final isGroupChat = arguments['isGroupChat'] ?? false;
+      final profilePic = arguments['profilePic'];
+      print(
+          "mobilechat screen $arguments , $name , $uid , $isGroupChat , $profilePic");
+      return MaterialPageRoute(
+        builder: (context) => MobileChatScreen(
+          name: name,
+          uid: uid,
+          isGroupChat: isGroupChat,
+          profilePic: profilePic,
+        ),
+      );
     // case ConfirmStatusScreen.routeName:
     //   final file = settings.arguments as File;
     //   return MaterialPageRoute(
@@ -65,10 +70,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //       status: status,
     //     ),
     //   );
-    // case CreateGroupScreen.routeName:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const CreateGroupScreen(),
-    //   );
+    case CreateGroupScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const CreateGroupScreen(),
+      );
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(
